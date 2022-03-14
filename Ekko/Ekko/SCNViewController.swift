@@ -83,6 +83,12 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Pause the view's session
         sceneView.session.pause()
         
+        if recorder?.status == .recording {
+            recorder?.stopAndExport()
+        }
+        recorder?.onlyRenderWhileRecording = true
+        recorder?.prepare(ARWorldTrackingConfiguration())
+        
         // Switch off the orientation lock for UIViewControllers with AR Scenes
         recorder?.rest()
     }
@@ -111,6 +117,16 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Hide Status Bar
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     // MARK: - Exported UIAlert present method
@@ -172,7 +188,7 @@ extension SCNViewController {
                         }
                     }
                 }
-            }else if recorder?.status == .recording {
+            } else if recorder?.status == .recording {
                 sender.setTitle("w/Duration", for: .normal)
                 pauseBtn.setTitle("Pause", for: .normal)
                 pauseBtn.isEnabled = false
@@ -185,7 +201,7 @@ extension SCNViewController {
                     }
                 }
             }
-        }else if sender.tag == 1 {
+        } else if sender.tag == 1 {
             //Pause
             if recorder?.status == .paused {
                 sender.setTitle("Pause", for: .normal)
