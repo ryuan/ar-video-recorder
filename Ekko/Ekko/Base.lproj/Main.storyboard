@@ -28,12 +28,6 @@
                                     <action selector="record:" destination="BV1-FR-VrT" eventType="touchUpInside" id="5Cp-Iq-xuK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-f9-ETl">
-                                <rect key="frame" x="301" y="791" width="64" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Pause"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -45,7 +39,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pauseBtn" destination="oKc-f9-ETl" id="jWr-jX-5kt"/>
                         <outlet property="recordBtn" destination="oih-0v-YR4" id="2iB-zN-ydp"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>

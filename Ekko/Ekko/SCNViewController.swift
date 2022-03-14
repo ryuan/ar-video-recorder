@@ -15,7 +15,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var recordBtn: UIButton!
-    @IBOutlet weak var pauseBtn: UIButton!
+
     
     var recorder: RecordAR?
     
@@ -168,47 +168,30 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
 extension SCNViewController {
     @IBAction func record(_ sender: UIButton) {
-        if sender.tag == 0 {
-            //Record with duration
-            if recorder?.status == .readyToRecord {
-                sender.setTitle("Stop", for: .normal)
-                pauseBtn.setTitle("Pause", for: .normal)
-                pauseBtn.isEnabled = false
-                recordBtn.isEnabled = false
-                recordingQueue.async {
-                    self.recorder?.record(forDuration: 10) { path in
-                        self.recorder?.export(video: path) { saved, status in
-                            DispatchQueue.main.sync {
-                                sender.setTitle("w/Duration", for: .normal)
-                                self.pauseBtn.setTitle("Pause", for: .normal)
-                                self.pauseBtn.isEnabled = false
-                                self.recordBtn.isEnabled = true
-                                self.exportMessage(success: saved, status: status)
-                            }
-                        }
-                    }
-                }
-            } else if recorder?.status == .recording {
-                sender.setTitle("w/Duration", for: .normal)
-                pauseBtn.setTitle("Pause", for: .normal)
-                pauseBtn.isEnabled = false
-                recordBtn.isEnabled = true
-                recorder?.stop() { path in
+        //Record with duration
+        if recorder?.status == .readyToRecord {
+            sender.setTitle("Stop", for: .normal)
+            recordBtn.isEnabled = false
+            recordingQueue.async {
+                self.recorder?.record(forDuration: 10) { path in
                     self.recorder?.export(video: path) { saved, status in
                         DispatchQueue.main.sync {
+                            sender.setTitle("Record", for: .normal)
+                            self.recordBtn.isEnabled = true
                             self.exportMessage(success: saved, status: status)
                         }
                     }
                 }
             }
-        } else if sender.tag == 1 {
-            //Pause
-            if recorder?.status == .paused {
-                sender.setTitle("Pause", for: .normal)
-                recorder?.record()
-            }else if recorder?.status == .recording {
-                sender.setTitle("Resume", for: .normal)
-                recorder?.pause()
+        } else if recorder?.status == .recording {
+            sender.setTitle("Record", for: .normal)
+            recordBtn.isEnabled = true
+            recorder?.stop() { path in
+                self.recorder?.export(video: path) { saved, status in
+                    DispatchQueue.main.sync {
+                        self.exportMessage(success: saved, status: status)
+                    }
+                }
             }
         }
     }
