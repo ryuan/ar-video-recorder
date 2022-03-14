@@ -15,7 +15,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var recordBtn: UIButton!
-
+    @IBOutlet weak var circleProgressBtn: UIButton!
     
     var recorder: RecordAR?
     
@@ -36,6 +36,14 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        // Programmatically make button and loading ring into circle
+        recordBtn.layer.cornerRadius = recordBtn.frame.width / 2
+        recordBtn.layer.masksToBounds = true
+        circleProgressBtn.layer.cornerRadius = circleProgressBtn.frame.width / 2
+        circleProgressBtn.layer.masksToBounds = true
+        circleProgressBtn.layer.borderWidth = 4
+        circleProgressBtn.layer.borderColor = UIColor.white.cgColor
         
         // Initialize ARVideoKit recorder
         recorder = RecordAR(ARSceneKit: sceneView)
@@ -170,22 +178,36 @@ extension SCNViewController {
     @IBAction func record(_ sender: UIButton) {
         //Record with duration
         if recorder?.status == .readyToRecord {
-            sender.setTitle("Stop", for: .normal)
+//            sender.setTitle("Stop", for: .normal)
             recordBtn.isEnabled = false
+            recordBtn.backgroundColor = .red
+            
+            let circleProgressView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
+            circleProgressView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
+            circleProgressView.center = recordBtn.center
+            self.sceneView.addSubview(circleProgressView)
+            circleProgressBtn.layer.borderColor = UIColor.clear.cgColor
+            circleProgressView.animateCircle(duration: 10, delay: 0.5)
+            
             recordingQueue.async {
                 self.recorder?.record(forDuration: 10) { path in
                     self.recorder?.export(video: path) { saved, status in
                         DispatchQueue.main.sync {
-                            sender.setTitle("Record", for: .normal)
+//                            sender.setTitle("Record", for: .normal)
                             self.recordBtn.isEnabled = true
+                            self.recordBtn.backgroundColor = .white
+                            self.circleProgressBtn.layer.borderColor = UIColor.white.cgColor
+                            circleProgressView.removeFromSuperview()
                             self.exportMessage(success: saved, status: status)
                         }
                     }
                 }
             }
         } else if recorder?.status == .recording {
-            sender.setTitle("Record", for: .normal)
+//            sender.setTitle("Record", for: .normal)
             recordBtn.isEnabled = true
+            recordBtn.backgroundColor = .white
+            circleProgressBtn.layer.borderColor = UIColor.white.cgColor
             recorder?.stop() { path in
                 self.recorder?.export(video: path) { saved, status in
                     DispatchQueue.main.sync {
