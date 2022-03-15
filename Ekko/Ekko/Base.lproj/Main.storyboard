@@ -39,18 +39,27 @@
                                     <action selector="record:" destination="BV1-FR-VrT" eventType="touchUpInside" id="5Cp-Iq-xuK"/>
                                 </connections>
                             </button>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pza-Ov-NLI">
+                                <rect key="frame" x="189.5" y="781.5" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="FiV-pW-VrV"/>
+                                    <constraint firstAttribute="height" constant="35" id="JDy-kA-DqS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="gnl-Pk-iku" secondAttribute="bottom" constant="20" id="8BG-ob-I0x"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
+                            <constraint firstItem="oih-0v-YR4" firstAttribute="centerY" secondItem="Pza-Ov-NLI" secondAttribute="centerY" id="HYD-O6-q9H"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="fmE-rx-c1h"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                             <constraint firstItem="gnl-Pk-iku" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="xsp-rg-9wR"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="oih-0v-YR4" secondAttribute="bottom" constant="28" id="ybN-ig-698"/>
+                            <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="Pza-Ov-NLI" secondAttribute="centerX" id="yru-gd-rEH"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -58,6 +67,7 @@
                         <outlet property="circleProgressBtn" destination="gnl-Pk-iku" id="Lv7-oG-pWB"/>
                         <outlet property="recordBtn" destination="oih-0v-YR4" id="2iB-zN-ydp"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="stopSquareView" destination="Pza-Ov-NLI" id="gsj-PW-aKm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
