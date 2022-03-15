@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SceneKit
 import ARKit
 import ARVideoKit
 import Photos
@@ -14,10 +13,11 @@ import Photos
 class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, RecordARDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var recordBtn: UIButton!
-    @IBOutlet weak var circleProgressBtn: UIButton!
+    @IBOutlet var recordBtn: UIButton!
+    @IBOutlet var circleProgressBtn: UIButton!
     
     var recorder: RecordAR?
+    var circleProgressView: CircleProgressView?
     
     // Prepare dispatch queue to leverage GCD for running different recording tasks and managing threads
     let recordingQueue = DispatchQueue(label: "recordingThread", attributes: .concurrent)
@@ -36,6 +36,9 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         
         // Set the scene to the view
         sceneView.scene = scene
+        sceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.2)
+        sceneView.automaticallyUpdatesLighting = true
+        sceneView.autoenablesDefaultLighting = true
         
         // Programmatically make button and loading ring into circle
         recordBtn.layer.cornerRadius = recordBtn.frame.width / 2
@@ -86,7 +89,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+//        super.viewWillDisappear(animated)
         
         // Pause the view's session
         sceneView.session.pause()
@@ -112,20 +115,20 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     }
 */
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
+//    func session(_ session: ARSession, didFailWithError error: Error) {
+//        // Present an error message to the user
+//
+//    }
+//
+//    func sessionWasInterrupted(_ session: ARSession) {
+//        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+//
+//    }
+//
+//    func sessionInterruptionEnded(_ session: ARSession) {
+//        // Reset tracking and/or remove existing anchors if consistent tracking is required
+//
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -176,38 +179,39 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
 extension SCNViewController {
     @IBAction func record(_ sender: UIButton) {
-        //Record with duration
+        // Record with duration
         if recorder?.status == .readyToRecord {
-//            sender.setTitle("Stop", for: .normal)
-            recordBtn.isEnabled = false
+            // Recording started. Set to Record
             recordBtn.backgroundColor = .red
             
-            let circleProgressView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
-            circleProgressView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
-            circleProgressView.center = recordBtn.center
-            self.sceneView.addSubview(circleProgressView)
+            // Generate circle progress ring
+            let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
+            loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
+            loadingView.center = recordBtn.center
+            self.sceneView.insertSubview(loadingView, belowSubview: recordBtn)
+            loadingView.animateCircle(duration: 10, delay: 0.5)
+            
+            circleProgressView = loadingView
             circleProgressBtn.layer.borderColor = UIColor.clear.cgColor
-            circleProgressView.animateCircle(duration: 10, delay: 0.5)
             
             recordingQueue.async {
                 self.recorder?.record(forDuration: 10) { path in
                     self.recorder?.export(video: path) { saved, status in
                         DispatchQueue.main.sync {
-//                            sender.setTitle("Record", for: .normal)
-                            self.recordBtn.isEnabled = true
+                            // Recording stopped. Set to readyToRecord
                             self.recordBtn.backgroundColor = .white
                             self.circleProgressBtn.layer.borderColor = UIColor.white.cgColor
-                            circleProgressView.removeFromSuperview()
+                            loadingView.removeFromSuperview()
                             self.exportMessage(success: saved, status: status)
                         }
                     }
                 }
             }
         } else if recorder?.status == .recording {
-//            sender.setTitle("Record", for: .normal)
-            recordBtn.isEnabled = true
+            // Recording stopped. Set to readyToRecord
             recordBtn.backgroundColor = .white
             circleProgressBtn.layer.borderColor = UIColor.white.cgColor
+            circleProgressView = nil
             recorder?.stop() { path in
                 self.recorder?.export(video: path) { saved, status in
                     DispatchQueue.main.sync {
