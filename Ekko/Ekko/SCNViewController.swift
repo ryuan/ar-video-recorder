@@ -166,8 +166,10 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 extension SCNViewController {
     @IBAction func shoot(_ sender: UIButton) {
         if currentOption == 0 {
+            print("video option recognized:")
             // Record with duration
             if recorder?.status == .readyToRecord {
+                print("recording started")
                 // Recording started. Set to Record
                 sender.backgroundColor = .red
                 stopSquareView.backgroundColor = .systemPink
@@ -197,6 +199,7 @@ extension SCNViewController {
                     }
                 }
             } else if recorder?.status == .recording {
+                print("terminated recording")
                 // Recording stopped. Set to readyToRecord
                 sender.backgroundColor = .white
                 stopSquareView.backgroundColor = .clear
@@ -211,8 +214,10 @@ extension SCNViewController {
                 }
             }
         } else {
+            print("live photo option recognized:")
             // Live photo
             if recorder?.status == .readyToRecord {
+                print("snapping live photo")
                 snappingQueue.async {
                     self.recorder?.livePhoto(export: true) { ready, photo, status, saved in
                         /*
