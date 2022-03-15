@@ -126,7 +126,8 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         return true
     }
     
-    // MARK: - Exported UIAlert present method
+    // MARK: - Present post-exporting UIAlert
+    // REMINDER TO SELF: METHOD MUST BE CALLED IN MAIN THREAD OR APP WILL CRASH
     func exportMessage(success: Bool, status: PHAuthorizationStatus) {
         if success {
             let alert = UIAlertController(title: "Exported", message: "Media exported to camera roll successfully!", preferredStyle: .alert)
@@ -167,12 +168,15 @@ extension SCNViewController {
     @IBAction func shoot(_ sender: UIButton) {
         if currentOption == 0 {
             print("video option recognized:")
+            
             // Record with duration
             if recorder?.status == .readyToRecord {
-                print("recording started")
                 // Recording started. Set to Record
+                print("recording started")
+                
                 sender.backgroundColor = .red
                 stopSquareView.backgroundColor = .systemPink
+                optionButton.isEnabled = false
                 
                 // Generate circle progress ring
                 let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
@@ -191,6 +195,8 @@ extension SCNViewController {
                                 // Recording stopped. Set to readyToRecord
                                 sender.backgroundColor = .white
                                 self.stopSquareView.backgroundColor = .clear
+                                self.optionButton.isEnabled = true
+                                
                                 self.circleProgressBtn.layer.borderColor = UIColor.white.cgColor
                                 loadingView.removeFromSuperview()
                                 self.exportMessage(success: saved, status: status)
@@ -199,10 +205,13 @@ extension SCNViewController {
                     }
                 }
             } else if recorder?.status == .recording {
-                print("terminated recording")
                 // Recording stopped. Set to readyToRecord
+                print("terminated recording")
+                
                 sender.backgroundColor = .white
                 stopSquareView.backgroundColor = .clear
+                optionButton.isEnabled = true
+                
                 circleProgressBtn.layer.borderColor = UIColor.white.cgColor
                 circleProgressView = nil
                 recorder?.stop() { path in
@@ -214,10 +223,14 @@ extension SCNViewController {
                 }
             }
         } else {
-            print("live photo option recognized:")
             // Live photo
+            print("live photo option recognized:")
+            
             if recorder?.status == .readyToRecord {
                 print("snapping live photo")
+                
+                optionButton.isEnabled = false
+                
                 snappingQueue.async {
                     self.recorder?.livePhoto(export: true) { ready, photo, status, saved in
                         /*
@@ -228,7 +241,11 @@ extension SCNViewController {
                         
                         if saved {
                             // Inform user Live Photo has exported successfully
-                            self.exportMessage(success: saved, status: status)
+                            print("live photo successfully saved")
+                            DispatchQueue.main.sync {
+                                self.optionButton.isEnabled = true
+                                self.exportMessage(success: saved, status: status)
+                            }
                         }
                     }
                 }
