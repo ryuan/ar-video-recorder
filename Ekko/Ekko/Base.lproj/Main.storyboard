@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,6 +47,23 @@
                                     <constraint firstAttribute="height" constant="35" id="JDy-kA-DqS"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-XV-Tk9">
+                                <rect key="frame" x="30" y="779" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2Hk-Zt-G7S"/>
+                                    <constraint firstAttribute="width" constant="40" id="nEt-jS-c29"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="medium" weight="semibold"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeOption:" destination="BV1-FR-VrT" eventType="touchUpInside" id="BOl-45-OqB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -53,9 +71,11 @@
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="gnl-Pk-iku" secondAttribute="bottom" constant="20" id="8BG-ob-I0x"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerY" secondItem="Pza-Ov-NLI" secondAttribute="centerY" id="HYD-O6-q9H"/>
+                            <constraint firstItem="WKN-XV-Tk9" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="30" id="SWa-sa-TeC"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="fmE-rx-c1h"/>
+                            <constraint firstItem="WKN-XV-Tk9" firstAttribute="centerY" secondItem="oih-0v-YR4" secondAttribute="centerY" id="iQH-Rv-QHQ"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                             <constraint firstItem="gnl-Pk-iku" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="xsp-rg-9wR"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="oih-0v-YR4" secondAttribute="bottom" constant="28" id="ybN-ig-698"/>
@@ -65,6 +85,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="circleProgressBtn" destination="gnl-Pk-iku" id="Lv7-oG-pWB"/>
+                        <outlet property="optionButton" destination="WKN-XV-Tk9" id="bOy-Yw-MOH"/>
                         <outlet property="recordBtn" destination="oih-0v-YR4" id="2iB-zN-ydp"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="stopSquareView" destination="Pza-Ov-NLI" id="gsj-PW-aKm"/>
@@ -76,6 +97,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
