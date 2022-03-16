@@ -17,6 +17,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     @IBOutlet weak var stopSquareView: UIView!
     @IBOutlet weak var circleProgressBtn: UIButton!
     @IBOutlet weak var optionButton: UIButton!
+    @IBOutlet weak var closeBtn: UIButton!
     
     var recorder: RecordAR?
     var circleProgressView: CircleProgressView?
@@ -167,6 +168,10 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 //MARK: - Button Action Methods
 
 extension SCNViewController {
+    @IBAction func close(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
     @IBAction func shoot(_ sender: UIButton) {
         if currentOption == 0 {
             print("video option recognized:")
