@@ -37,6 +37,8 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 1, z: 0, duration: 1)))
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -71,13 +73,13 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Set the renderer's delegate
         recorder?.renderAR = self
         
-        // Configure the renderer to perform additional image & video processing 👁
+        // Configure the renderer to perform additional image & video processing
         recorder?.onlyRenderWhileRecording = false
         
         // Configure ARKit content mode. Default is .auto
         recorder?.contentMode = .aspectFill
         
-        //record or photo add environment light rendering, Default is false
+        // Add environment light rendering. Default is false
         recorder?.enableAdjustEnvironmentLighting = true
         
         // Set the UIViewController orientations
@@ -101,7 +103,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
+        super.viewWillDisappear(animated)
         
         // Pause the view's session
         sceneView.session.pause()
@@ -196,7 +198,6 @@ extension SCNViewController {
                                 sender.backgroundColor = .white
                                 self.stopSquareView.backgroundColor = .clear
                                 self.optionButton.isEnabled = true
-                                
                                 self.circleProgressBtn.layer.borderColor = UIColor.white.cgColor
                                 loadingView.removeFromSuperview()
                                 self.exportMessage(success: saved, status: status)
@@ -213,7 +214,8 @@ extension SCNViewController {
                 optionButton.isEnabled = true
                 
                 circleProgressBtn.layer.borderColor = UIColor.white.cgColor
-                circleProgressView = nil
+                circleProgressView?.removeFromSuperview()
+                
                 recorder?.stop() { path in
                     self.recorder?.export(video: path) { saved, status in
                         DispatchQueue.main.sync {
@@ -223,13 +225,23 @@ extension SCNViewController {
                 }
             }
         } else {
-            // Live photo
             print("live photo option recognized:")
             
+            // Live photo
             if recorder?.status == .readyToRecord {
                 print("snapping live photo")
                 
+                sender.backgroundColor = .red
                 optionButton.isEnabled = false
+                
+                // Generate circle progress ring
+                let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
+                loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
+                loadingView.center = sender.center
+                self.sceneView.insertSubview(loadingView, belowSubview: sender)
+                loadingView.animateCircle(duration: 3, delay: 0.5)
+                
+                circleProgressBtn.layer.borderColor = UIColor.clear.cgColor
                 
                 snappingQueue.async {
                     self.recorder?.livePhoto(export: true) { ready, photo, status, saved in
@@ -243,7 +255,10 @@ extension SCNViewController {
                             // Inform user Live Photo has exported successfully
                             print("live photo successfully saved")
                             DispatchQueue.main.sync {
+                                sender.backgroundColor = .white
                                 self.optionButton.isEnabled = true
+                                self.circleProgressBtn.layer.borderColor = UIColor.white.cgColor
+                                loadingView.removeFromSuperview()
                                 self.exportMessage(success: saved, status: status)
                             }
                         }
