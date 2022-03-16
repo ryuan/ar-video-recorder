@@ -189,7 +189,7 @@ extension SCNViewController {
                 let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
                 loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
                 loadingView.center = sender.center
-                self.view.addSubview(loadingView)
+                self.view.insertSubview(loadingView, belowSubview: recordBtn)
                 loadingView.animateCircle(duration: 10, delay: 0.5)
                 
                 circleProgressView = loadingView
@@ -243,7 +243,7 @@ extension SCNViewController {
                 let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
                 loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
                 loadingView.center = sender.center
-                self.view.addSubview(loadingView)
+                self.view.insertSubview(loadingView, belowSubview: recordBtn)
                 loadingView.animateCircle(duration: 3, delay: 0.75)
                 
                 circleProgressBtn.layer.borderColor = UIColor.clear.cgColor
