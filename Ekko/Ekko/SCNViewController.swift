@@ -33,7 +33,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -184,7 +184,7 @@ extension SCNViewController {
                 let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
                 loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
                 loadingView.center = sender.center
-                self.sceneView.insertSubview(loadingView, belowSubview: sender)
+                self.view.addSubview(loadingView)
                 loadingView.animateCircle(duration: 10, delay: 0.5)
                 
                 circleProgressView = loadingView
@@ -238,8 +238,8 @@ extension SCNViewController {
                 let loadingView = CircleProgressView(progress: 1, baseColor: .white, progressColor: .red)
                 loadingView.bounds = CGRect(x: 0, y: 0, width: 85, height: 85)
                 loadingView.center = sender.center
-                self.sceneView.insertSubview(loadingView, belowSubview: sender)
-                loadingView.animateCircle(duration: 3, delay: 0.5)
+                self.view.addSubview(loadingView)
+                loadingView.animateCircle(duration: 3, delay: 0.75)
                 
                 circleProgressBtn.layer.borderColor = UIColor.clear.cgColor
                 
