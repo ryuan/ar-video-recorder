@@ -34,7 +34,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = false
+        sceneView.showsStatistics = true
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -60,7 +60,11 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Initialize initial shooting option based on last option (or 1/video initial)
         let lastOption = DataManager.sharedInstance.getLastOption()
         currentOption = lastOption
-        optionButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
+        if currentOption == 0 {
+            optionButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
+        } else {
+            optionButton.setImage(UIImage(systemName: "livephoto"), for: .normal)
+        }
         
         // Initialize ARVideoKit recorder
         recorder = RecordAR(ARSceneKit: sceneView)
