@@ -38,12 +38,10 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 1, z: 0, duration: 1)))
         
         // Set the scene to the view
         sceneView.scene = scene
-        sceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.2)
+        sceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.5)
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         

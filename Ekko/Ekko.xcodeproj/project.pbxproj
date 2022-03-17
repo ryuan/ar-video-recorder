@@ -8,24 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		12293AC927DDEB0300EB81A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12293AC827DDEB0300EB81A2 /* AppDelegate.swift */; };
-		12293ACB27DDEB0300EB81A2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12293ACA27DDEB0300EB81A2 /* art.scnassets */; };
 		12293ACD27DDEB0300EB81A2 /* SCNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */; };
 		12293AD027DDEB0300EB81A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12293ACE27DDEB0300EB81A2 /* Main.storyboard */; };
 		12293AD227DDEB0500EB81A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12293AD127DDEB0500EB81A2 /* Assets.xcassets */; };
 		12293AD527DDEB0500EB81A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */; };
 		12293ADE27DDEC8C00EB81A2 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 12293ADD27DDEC8C00EB81A2 /* ARVideoKit */; };
 		12293AE227DF4A4600EB81A2 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */; };
+		12DD40D527E316040030971B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DD40D427E316040030971B /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12293AC527DDEB0300EB81A2 /* Ekko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ekko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12293AC827DDEB0300EB81A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		12293ACA27DDEB0300EB81A2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNViewController.swift; sourceTree = "<group>"; };
 		12293ACF27DDEB0300EB81A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12293AD127DDEB0500EB81A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12293AD427DDEB0500EB81A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
+		12DD40D427E316040030971B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +60,10 @@
 			isa = PBXGroup;
 			children = (
 				12293AC827DDEB0300EB81A2 /* AppDelegate.swift */,
-				12293ACA27DDEB0300EB81A2 /* art.scnassets */,
 				12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */,
 				12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */,
 				12293ACE27DDEB0300EB81A2 /* Main.storyboard */,
+				12DD40D427E316040030971B /* art.scnassets */,
 				12293AD127DDEB0500EB81A2 /* Assets.xcassets */,
 				12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */,
 			);
@@ -134,8 +134,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12293ACB27DDEB0300EB81A2 /* art.scnassets in Resources */,
 				12293AD527DDEB0500EB81A2 /* LaunchScreen.storyboard in Resources */,
+				12DD40D527E316040030971B /* art.scnassets in Resources */,
 				12293AD227DDEB0500EB81A2 /* Assets.xcassets in Resources */,
 				12293AD027DDEB0300EB81A2 /* Main.storyboard in Resources */,
 			);
@@ -309,7 +309,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -342,7 +343,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
