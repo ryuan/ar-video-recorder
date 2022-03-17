@@ -51,13 +51,24 @@ with the AR world</string>
                                     <segue destination="BV1-FR-VrT" kind="show" id="FAp-av-n88"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIw-TO-Km1">
+                                <rect key="frame" x="320" y="822.66666666666663" width="48" height="39"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="photo.on.rectangle.angled" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="large" weight="regular"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qny-up-OXW"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Qny-up-OXW" firstAttribute="trailing" secondItem="WAx-VN-95R" secondAttribute="trailing" constant="20" id="0UK-Cp-w0m"/>
                             <constraint firstItem="IJi-bo-dFW" firstAttribute="centerX" secondItem="jXl-f3-Fps" secondAttribute="centerX" id="7Tw-i7-uQD"/>
+                            <constraint firstItem="Qny-up-OXW" firstAttribute="trailing" secondItem="TIw-TO-Km1" secondAttribute="trailing" constant="60" id="9ag-8q-lq5"/>
                             <constraint firstItem="WAx-VN-95R" firstAttribute="top" secondItem="CY2-qo-vfE" secondAttribute="bottom" id="Flf-gu-uTa"/>
+                            <constraint firstItem="TIw-TO-Km1" firstAttribute="centerY" secondItem="IJi-bo-dFW" secondAttribute="centerY" id="VxP-AJ-dOw"/>
                             <constraint firstItem="dxz-rn-pJ9" firstAttribute="leading" secondItem="CY2-qo-vfE" secondAttribute="trailing" constant="8" symbolic="YES" id="cdj-dG-G3Y"/>
                             <constraint firstItem="IJi-bo-dFW" firstAttribute="bottom" secondItem="Qny-up-OXW" secondAttribute="bottom" id="hVC-wk-6wr"/>
                             <constraint firstItem="WAx-VN-95R" firstAttribute="centerY" secondItem="jXl-f3-Fps" secondAttribute="centerY" id="hcs-jf-O22"/>
@@ -126,10 +137,11 @@ with the AR world</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuQ-xw-jfH">
-                                <rect key="frame" x="20" y="20" width="30" height="34"/>
+                                <rect key="frame" x="20" y="20" width="34" height="32"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
+                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="large" weight="semibold"/>
                                 </state>
                                 <connections>
@@ -138,7 +150,7 @@ with the AR world</string>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="3Kd-fc-8xK"/>
                             <constraint firstItem="VuQ-xw-jfH" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="20" id="3Zh-gn-Bsw"/>
@@ -169,15 +181,14 @@ with the AR world</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.188405797101453" y="63.616071428571423"/>
+            <point key="canvasLocation" x="48" y="63"/>
         </scene>
     </scenes>
     <resources>
         <image name="camera.circle" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="photo.on.rectangle.angled" catalog="system" width="128" height="100"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

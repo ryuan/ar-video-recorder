@@ -57,8 +57,9 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         stopSquareView.layer.cornerRadius = 5
         stopSquareView.layer.masksToBounds = true
         
-        // Initialize initial shooting option (0 for video, 1 for live photo)
-        currentOption = 0
+        // Initialize initial shooting option based on last option (or 1/video initial)
+        let lastOption = DataManager.sharedInstance.getLastOption()
+        currentOption = lastOption
         optionButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
         
         // Initialize ARVideoKit recorder
@@ -279,6 +280,7 @@ extension SCNViewController {
             optionButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
             currentOption = 0
         }
+        DataManager.sharedInstance.saveLastOption(currentOption!)
     }
 }
 

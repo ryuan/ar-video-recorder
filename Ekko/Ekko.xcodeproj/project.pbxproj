@@ -15,6 +15,8 @@
 		12293ADE27DDEC8C00EB81A2 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 12293ADD27DDEC8C00EB81A2 /* ARVideoKit */; };
 		12293AE227DF4A4600EB81A2 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */; };
 		12DD40D527E316040030971B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DD40D427E316040030971B /* art.scnassets */; };
+		12DD40D727E33ADB0030971B /* MediaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */; };
+		12DD40DF27E34A580030971B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40DE27E34A580030971B /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		12293AD427DDEB0500EB81A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		12DD40D427E316040030971B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewController.swift; sourceTree = "<group>"; };
+		12DD40DE27E34A580030971B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +64,40 @@
 			isa = PBXGroup;
 			children = (
 				12293AC827DDEB0300EB81A2 /* AppDelegate.swift */,
-				12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */,
-				12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */,
+				12DD40E027E34A5D0030971B /* Model */,
+				12DD40DA27E33C8B0030971B /* View */,
+				12DD40D927E33C800030971B /* Controller */,
 				12293ACE27DDEB0300EB81A2 /* Main.storyboard */,
 				12DD40D427E316040030971B /* art.scnassets */,
 				12293AD127DDEB0500EB81A2 /* Assets.xcassets */,
 				12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */,
 			);
 			path = Ekko;
+			sourceTree = "<group>";
+		};
+		12DD40D927E33C800030971B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */,
+				12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12DD40DA27E33C8B0030971B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		12DD40E027E34A5D0030971B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				12DD40DE27E34A580030971B /* DataManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				12293ACD27DDEB0300EB81A2 /* SCNViewController.swift in Sources */,
+				12DD40DF27E34A580030971B /* DataManager.swift in Sources */,
+				12DD40D727E33ADB0030971B /* MediaCollectionViewController.swift in Sources */,
 				12293AC927DDEB0300EB81A2 /* AppDelegate.swift in Sources */,
 				12293AE227DF4A4600EB81A2 /* CircleProgressView.swift in Sources */,
 			);
