@@ -40,10 +40,10 @@ struct StoreReviewHelper {
     }
 
     fileprivate func requestReview(atController: UIViewController) {
-        let alert = UIAlertController(title: "Enjoying Ekko?", message: "Tap a star to rate it on the App Store.", preferredStyle: UIAlertController.Style.actionSheet)
+        let alert = UIAlertController(title: "Enjoying Ekko?", message: "Tap a star to rate it on the App Store.", preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        let play = UIAlertAction(title: "Submit", style: .default)
+        let play = UIAlertAction(title: "Submit", style: .default, handler: {(alert: UIAlertAction!) in print("Success!")})
         
         alert.addAction(cancel)
         alert.addAction(play)
