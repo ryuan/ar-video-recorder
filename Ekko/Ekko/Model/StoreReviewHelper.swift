@@ -27,7 +27,7 @@ struct StoreReviewHelper {
                 return
         }
         
-        let nextlevel = 3 * (StoreReviewHelper.factorial(reviewRequestCount + 1))
+        let nextlevel = 2 * (StoreReviewHelper.factorial(reviewRequestCount + 1))
         if appOpenCount > nextlevel {
             StoreReviewHelper().requestReview()
             defaults.set(reviewRequestCount + 1, forKey: UserDefaults.reviewRequestNo)
