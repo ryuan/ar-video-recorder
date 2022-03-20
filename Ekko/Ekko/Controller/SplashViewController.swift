@@ -19,6 +19,7 @@ class SplashViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - IBOutlets
     //
     @IBOutlet weak var screenLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var splashSceneView: ARSCNView!
     
@@ -29,10 +30,11 @@ class SplashViewController: UIViewController, ARSCNViewDelegate {
         
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
         ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 1, z: 0, duration: 1)))
         
         splashSceneView.scene = scene
+        splashSceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.5)
         splashSceneView.backgroundColor = UIColor.systemGreen
     }
     
