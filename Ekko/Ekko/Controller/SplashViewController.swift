@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import ARKit
 
-class SplashViewController: UIViewController {
+class SplashViewController: UIViewController, ARSCNViewDelegate {
     //
     // MARK: - Properties
     //
@@ -19,11 +20,20 @@ class SplashViewController: UIViewController {
     //
     @IBOutlet weak var screenLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var splashSceneView: ARSCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        
+        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 1, z: 0, duration: 1)))
+        
+        splashSceneView.scene = scene
+        splashSceneView.backgroundColor = UIColor.systemGreen
     }
     
     //

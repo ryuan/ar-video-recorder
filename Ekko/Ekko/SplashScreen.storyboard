@@ -54,7 +54,7 @@ It's time for more.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wlf-Vh-SvO">
-                                <rect key="frame" x="87" y="357" width="240" height="128"/>
+                                <rect key="frame" x="87" y="398" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
                         </subviews>
@@ -64,6 +64,7 @@ It's time for more.</string>
                     <connections>
                         <outlet property="continueButton" destination="Cxx-Px-0tn" id="Dex-Ub-FPp"/>
                         <outlet property="screenLabel" destination="7Xk-rU-ysI" id="OMK-ht-OUY"/>
+                        <outlet property="splashSceneView" destination="Wlf-Vh-SvO" id="LGd-ql-VtQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
