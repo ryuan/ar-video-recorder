@@ -11,14 +11,16 @@ import UIKit
 class DataManager {
     public static let sharedInstance = DataManager()
     
+    let defaults = UserDefaults.standard
+    
     // MARK: - Last shooting option
     func saveLastOption(_ option: Int) {
-        UserDefaults.standard.set(option, forKey: "LastOption")
+        defaults.set(option, forKey: "LastOption")
     }
     
     func getLastOption() -> Int {
         if UserDefaults.standard.object(forKey: "LastOption") != nil {
-            return UserDefaults.standard.integer(forKey: "LastOption")
+            return defaults.integer(forKey: "LastOption")
         } else {
             return 0
         }

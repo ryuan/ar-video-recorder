@@ -106,7 +106,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         recorder?.prepare(configuration)
         
         // Prompt user for app review if app opened enough times (set to 3).
-        StoreReviewHelper.checkAndAskForReview()
+        StoreReviewHelper.checkAndAskForReview(atController: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
