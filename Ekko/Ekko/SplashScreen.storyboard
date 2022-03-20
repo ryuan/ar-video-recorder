@@ -23,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxx-Px-0tn">
-                                <rect key="frame" x="134.5" y="713" width="145" height="49"/>
+                                <rect key="frame" x="155" y="725" width="104.5" height="37"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
@@ -31,7 +31,8 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="Continue">
                                             <attributes>
-                                                <font key="NSFont" size="30" name="Helvetica"/>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="20" name="Helvetica"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -51,7 +52,7 @@ It's time for more.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wlf-Vh-SvO">
-                                <rect key="frame" x="20" y="320" width="374" height="363"/>
+                                <rect key="frame" x="20" y="320" width="374" height="375"/>
                             </arscnView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

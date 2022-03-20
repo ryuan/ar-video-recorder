@@ -32,9 +32,9 @@ class SplashViewController: UIViewController, ARSCNViewDelegate {
         
         let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
         ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 1, z: 0, duration: 1)))
+        ship.scale = SCNVector3(0.012, 0.012, 0.012)
         
         splashSceneView.scene = scene
-        splashSceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.5)
         splashSceneView.backgroundColor = UIColor.systemGreen
     }
     
