@@ -18,6 +18,8 @@
 		1275AA9127E777DB00222477 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1275AA9027E777DB00222477 /* SplashViewController.swift */; };
 		1275AA9327E7C86500222477 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1275AA9227E7C86500222477 /* Settings.bundle */; };
 		1275AAA527E8288A00222477 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1275AAA427E8288A00222477 /* ARVideoKit */; };
+		1299833527E88699003175CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1299833427E88699003175CE /* MainViewController.swift */; };
+		1299833927E88A86003175CE /* ocean.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1299833827E88A86003175CE /* ocean.mp4 */; };
 		12DD40D527E316040030971B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DD40D427E316040030971B /* art.scnassets */; };
 		12DD40DF27E34A580030971B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40DE27E34A580030971B /* DataManager.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		1275AA8E27E7767300222477 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		1275AA9027E777DB00222477 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		1275AA9227E7C86500222477 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1299833427E88699003175CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1299833827E88A86003175CE /* ocean.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocean.mp4; sourceTree = "<group>"; };
 		12DD40D427E316040030971B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		12DD40DE27E34A580030971B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,10 +79,11 @@
 				12DD40DA27E33C8B0030971B /* View */,
 				12DD40D927E33C800030971B /* Controller */,
 				12293ACE27DDEB0300EB81A2 /* Main.storyboard */,
+				1275AA8E27E7767300222477 /* SplashScreen.storyboard */,
+				12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */,
 				12DD40D427E316040030971B /* art.scnassets */,
 				12293AD127DDEB0500EB81A2 /* Assets.xcassets */,
-				12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */,
-				1275AA8E27E7767300222477 /* SplashScreen.storyboard */,
+				1299833827E88A86003175CE /* ocean.mp4 */,
 				1275AA9227E7C86500222477 /* Settings.bundle */,
 			);
 			path = Ekko;
@@ -96,6 +101,7 @@
 			children = (
 				12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */,
 				1275AA9027E777DB00222477 /* SplashViewController.swift */,
+				1299833427E88699003175CE /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -182,6 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1299833927E88A86003175CE /* ocean.mp4 in Resources */,
 				12293AD527DDEB0500EB81A2 /* LaunchScreen.storyboard in Resources */,
 				12DD40D527E316040030971B /* art.scnassets in Resources */,
 				12293AD227DDEB0500EB81A2 /* Assets.xcassets in Resources */,
@@ -198,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1299833527E88699003175CE /* MainViewController.swift in Sources */,
 				12293ACD27DDEB0300EB81A2 /* SCNViewController.swift in Sources */,
 				12DD40DF27E34A580030971B /* DataManager.swift in Sources */,
 				12293AC927DDEB0300EB81A2 /* AppDelegate.swift in Sources */,

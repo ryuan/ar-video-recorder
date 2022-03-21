@@ -5,16 +5,32 @@
 //  Created by Ruoda Yuan on 3/17/22.
 //
 
-import Foundation
 import UIKit
 import SceneKit
+import AVFoundation
 
 class DataManager {
     public static let sharedInstance = DataManager()
     
-//    private(set) var sceneShip: SCNScene
-    
+    private(set) var player: AVQueuePlayer?
+    private(set) var playerLooper: AVPlayerLooper?
     let defaults = UserDefaults.standard
+    
+    private init() {
+        guard let path = Bundle.main.path(forResource: "ocean", ofType: ".mp4") else {
+            return
+        }
+        
+        // Load the resource
+        let video = AVAsset(url: URL(fileURLWithPath: path))
+        let playerItem = AVPlayerItem(asset: video)
+        
+        // Setup the player
+        player = AVQueuePlayer(playerItem: playerItem)
+        
+        // Create a new player looper with the queue player and template item
+        playerLooper = AVPlayerLooper(player: player!, templateItem: playerItem)
+    }
     
     // MARK: - Last shooting option
     func saveLastOption(_ option: Int) {

@@ -210,7 +210,6 @@ extension SCNViewController {
             ship.eulerAngles = SCNVector3Make(0, -90, 0);
             
             // Animate the ship so it spins around its pivot axis
-            
             let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
             let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
             let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)

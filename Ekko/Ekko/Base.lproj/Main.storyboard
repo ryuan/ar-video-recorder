@@ -9,14 +9,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="zSj-4u-DZV">
             <objects>
-                <viewController id="96m-sf-US3" sceneMemberID="viewController">
+                <viewController id="96m-sf-US3" customClass="MainViewController" customModule="Ekko" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jXl-f3-Fps">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b03-H6-Hfy">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAx-VN-95R">
                                 <rect key="frame" x="20" y="422" width="388" height="82"/>
                                 <string key="text">take videos &amp; live photos
@@ -58,14 +62,21 @@ with the AR world</string>
                             <constraint firstItem="Qny-up-OXW" firstAttribute="trailing" secondItem="WAx-VN-95R" secondAttribute="trailing" constant="20" id="0UK-Cp-w0m"/>
                             <constraint firstItem="IJi-bo-dFW" firstAttribute="centerX" secondItem="jXl-f3-Fps" secondAttribute="centerX" id="7Tw-i7-uQD"/>
                             <constraint firstItem="WAx-VN-95R" firstAttribute="top" secondItem="CY2-qo-vfE" secondAttribute="bottom" id="Flf-gu-uTa"/>
+                            <constraint firstAttribute="bottom" secondItem="b03-H6-Hfy" secondAttribute="bottom" id="Qmf-lO-ywf"/>
                             <constraint firstItem="dxz-rn-pJ9" firstAttribute="leading" secondItem="CY2-qo-vfE" secondAttribute="trailing" constant="8" symbolic="YES" id="cdj-dG-G3Y"/>
+                            <constraint firstItem="b03-H6-Hfy" firstAttribute="leading" secondItem="Qny-up-OXW" secondAttribute="leading" id="ehW-oH-kZ0"/>
+                            <constraint firstItem="b03-H6-Hfy" firstAttribute="top" secondItem="jXl-f3-Fps" secondAttribute="top" id="epl-70-rnN"/>
                             <constraint firstItem="IJi-bo-dFW" firstAttribute="bottom" secondItem="Qny-up-OXW" secondAttribute="bottom" id="hVC-wk-6wr"/>
                             <constraint firstItem="WAx-VN-95R" firstAttribute="centerY" secondItem="jXl-f3-Fps" secondAttribute="centerY" id="hcs-jf-O22"/>
+                            <constraint firstItem="b03-H6-Hfy" firstAttribute="trailing" secondItem="Qny-up-OXW" secondAttribute="trailing" id="toe-RI-PUx"/>
                             <constraint firstItem="CY2-qo-vfE" firstAttribute="leading" secondItem="Qny-up-OXW" secondAttribute="leading" constant="20" id="v8Q-Fm-Ymm"/>
                             <constraint firstItem="WAx-VN-95R" firstAttribute="leading" secondItem="Qny-up-OXW" secondAttribute="leading" constant="20" id="wx7-YF-a86"/>
                             <constraint firstItem="dxz-rn-pJ9" firstAttribute="top" secondItem="CY2-qo-vfE" secondAttribute="top" id="zzE-WL-ObH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="videoView" destination="b03-H6-Hfy" id="pa9-z1-Lob"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sI6-vV-pMc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
