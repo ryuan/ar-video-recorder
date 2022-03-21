@@ -16,15 +16,7 @@ class MainViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         playVideo()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        playVideo()
-    }
-    
+    }    
 
     func playVideo() {
         // Setup the layer

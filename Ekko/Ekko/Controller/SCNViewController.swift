@@ -37,15 +37,9 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         
-        // Load the ship scene to start after checking cache
-        switch DataManager.sharedInstance.getLastScene() {
-        case 0:
-            prepareShip()
-        case 1:
-            prepareSphere()
-        default:
-            prepareShip()
-        }
+        // Load the last used scene, otherwise render default scene
+        currentScene = DataManager.sharedInstance.getLastScene()
+        playScene(currentScene ?? 0)
         
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
@@ -180,28 +174,52 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
 extension SCNViewController {
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+        guard let prevScene = currentScene else {
+            return
+        }
         if sender.direction == .right {
-            prepareShip()
-            currentScene = 0
+            print("swiped right!")
+            if prevScene > 0 {
+                currentScene = prevScene - 1
+                playScene(currentScene!)
+                DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+            }
         }
         if sender.direction == .left {
-            prepareSphere()
-            currentScene = 1
-            
+            print("swiped left!")
+            if prevScene < 2 {
+                currentScene = prevScene + 1
+                playScene(currentScene!)
+                DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+            }
         }
-        DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
     }
 }
 
 
-// MARK: - Prepare and configure SCNScenes
+// MARK: - Prepare and play SCNScenes
 
 // REMINDER TO SELF: Must run SCNAction on main thread if animating multiple scenes!!!
 extension SCNViewController {
+    func playScene(_ sceneOption: Int) {
+        print(sceneOption)
+        
+        switch sceneOption {
+        case 0:
+            prepareShip()
+        case 1:
+            prepareFox()
+        case 2:
+            prepareSphere()
+        default:
+            prepareShip()
+        }
+    }
+    
     func prepareShip() {
         DispatchQueue.main.async {
             // Create a new scene
-            let scene = SCNScene(named: "art.scnassets/ship.scn")!
+            let scene = SCNScene(named: "art.scnassets/Ship/ship.scn")!
             let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
 
             // Set pivot point away from ship body
@@ -231,7 +249,7 @@ extension SCNViewController {
     func prepareSphere() {
         DispatchQueue.main.async {
             // Create a new scene
-            let scene = SCNScene(named: "art.scnassets/sphere.scn")!
+            let scene = SCNScene(named: "art.scnassets/Sphere/sphere.scn")!
             let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
             
             self.centerPivot(node: sphere)
@@ -255,6 +273,30 @@ extension SCNViewController {
         }
     }
     
+    func prepareFox() {
+        DispatchQueue.main.async { [self] in
+            // Create a new scene
+            let scene = SCNScene(named: "art.scnassets/Fox/max.scn")!
+            let model = scene.rootNode.childNode(withName: "Max_rootNode", recursively: true)!
+            
+            // Prepare and load different fox animations onto base model
+            let idleAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_idle.scn")
+            idleAnimation.stop()
+            model.addAnimationPlayer(idleAnimation, forKey: "idle")
+            
+            // Play animations
+            model.animationPlayer(forKey: "idle")?.play()
+            
+            // Scale up the size of the scene to better fit live camera feed
+            model.scale = SCNVector3(1.5, 1.5, 1.5)
+            // Set position so that the model is comfortable height and distance from device
+            model.position = SCNVector3(0.0, -1.5, -1.2)
+            
+            // Set the scene to the view
+            self.sceneView.scene = scene
+        }
+    }
+    
     func centerPivot(node: SCNNode) {
         // Set the pivot point of the AR scene to the center of the bounding box
         
@@ -267,6 +309,21 @@ extension SCNViewController {
 
         // 3. Set The Pivot
         node.pivot = SCNMatrix4MakeTranslation(translation.x, translation.y, translation.z)
+    }
+}
+
+extension SCNAnimationPlayer {
+    class func loadAnimation(fromSceneNamed sceneName: String) -> SCNAnimationPlayer {
+        let scene = SCNScene( named: sceneName )!
+        // find top level animation
+        var animationPlayer: SCNAnimationPlayer! = nil
+        scene.rootNode.enumerateChildNodes { (child, stop) in
+            if !child.animationKeys.isEmpty {
+                animationPlayer = child.animationPlayer(forKey: child.animationKeys[0])
+                stop.pointee = true
+            }
+        }
+        return animationPlayer
     }
 }
 
