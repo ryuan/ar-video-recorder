@@ -153,15 +153,30 @@ with the AR world</string>
                                     <action selector="close:" destination="BV1-FR-VrT" eventType="touchUpInside" id="MI1-U0-B7r"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hx-3r-aUd">
+                                <rect key="frame" x="90.000000000000014" y="702.66666666666663" width="248.33333333333337" height="22"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="swipe right/left to swap AR model">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <font key="NSFont" size="16" name="Avenir-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="3Kd-fc-8xK"/>
                             <constraint firstItem="VuQ-xw-jfH" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="20" id="3Zh-gn-Bsw"/>
+                            <constraint firstItem="gnl-Pk-iku" firstAttribute="top" secondItem="8Hx-3r-aUd" secondAttribute="bottom" constant="20" id="42p-hs-6Xa"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" constant="-50" id="5su-xc-VBF"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerX" secondItem="gnl-Pk-iku" secondAttribute="centerX" id="6R6-lI-l0Y"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="centerY" secondItem="fQZ-KI-GVf" secondAttribute="centerY" id="GDk-zK-m3Y"/>
+                            <constraint firstItem="8Hx-3r-aUd" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="L0a-PT-yLL"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="Q4A-OO-PGV"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerY" secondItem="gnl-Pk-iku" secondAttribute="centerY" id="YWZ-Y8-Wo4"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="height" secondItem="U0K-SW-4ec" secondAttribute="height" id="Z4S-Pa-XfL"/>
