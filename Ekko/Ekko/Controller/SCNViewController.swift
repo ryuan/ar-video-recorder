@@ -36,29 +36,9 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        // Load the ship scene to start
+        prepareShip()
         
-        // Set the pivot point of the AR scene to the center of the bounding box
-        
-        // 1. Get The Bounding Box Of The Node
-        let minimum = SIMD3<Float>(ship.boundingBox.min)
-        let maximum = SIMD3<Float>(ship.boundingBox.max)
-        
-        // 2. Set The Translation To Be Half Way Between The Vector
-        let translation = (maximum + minimum) * 0.5
-
-        // 3. Set The Pivot
-        ship.pivot = SCNMatrix4MakeTranslation(translation.x, translation.y, translation.z)
-        
-        // Scale down the size of the scene to better fit live camera feed
-        ship.scale = SCNVector3(0.01, 0.01, 0.01)
-        // Set position so that the model is a bit lower from the phone height
-        ship.position = SCNVector3(0.0, -0.1, -0.8)
-        
-        // Set the scene to the view
-        sceneView.scene = scene
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         
@@ -188,7 +168,58 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 }
 
 
-//MARK: - Button Action Methods
+// MARK: - Prepare Scenes
+
+extension SCNViewController {
+    func prepareShip() {
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        
+        centerPivot(node: ship)
+        
+        // Scale down the size of the scene to better fit live camera feed
+        ship.scale = SCNVector3(0.01, 0.01, 0.01)
+        // Set position so that the model is a bit lower from the phone height
+        ship.position = SCNVector3(0.0, -0.1, -0.8)
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+    }
+    
+    func prepareSphere() {
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/sphere.scn")!
+        let sphere = scene.rootNode
+        
+        centerPivot(node: sphere)
+        
+        // Scale down the size of the scene to better fit live camera feed
+        sphere.scale = SCNVector3(0.01, 0.01, 0.01)
+        // Set position so that the model is a bit lower from the phone height
+        sphere.position = SCNVector3(0.0, -0.1, -0.8)
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+    }
+    
+    func centerPivot(node: SCNNode) {
+        // Set the pivot point of the AR scene to the center of the bounding box
+        
+        // 1. Get The Bounding Box Of The Node
+        let minimum = SIMD3<Float>(node.boundingBox.min)
+        let maximum = SIMD3<Float>(node.boundingBox.max)
+        
+        // 2. Set The Translation To Be Half Way Between The Vector
+        let translation = (maximum + minimum) * 0.5
+
+        // 3. Set The Pivot
+        node.pivot = SCNMatrix4MakeTranslation(translation.x, translation.y, translation.z)
+    }
+}
+
+
+// MARK: - Button Action Methods
 
 extension SCNViewController {
     @IBAction func close(_ sender: UIButton) {
@@ -309,7 +340,7 @@ extension SCNViewController {
 }
 
 
-//MARK: - ARVideoKit Delegate Methods
+// MARK: - ARVideoKit Delegate Methods
 
 extension SCNViewController {
     func frame(didRender buffer: CVPixelBuffer, with time: CMTime, using rawBuffer: CVPixelBuffer) {
