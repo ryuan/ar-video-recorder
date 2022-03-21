@@ -196,7 +196,6 @@ extension SCNViewController {
 
 // MARK: - Prepare and play SCNScenes
 
-// REMINDER TO SELF: Must run SCNAction on main thread if animating multiple scenes!!!
 extension SCNViewController {
     func playScene(_ sceneOption: Int) {
         print(sceneOption)
@@ -215,75 +214,73 @@ extension SCNViewController {
             prepareShip()
             sceneLabel.text = "✈️"
         }
+        
+        // Reset the recorder with new RecordAR instance to align all rendering threads for recording
+        recorder = RecordAR(ARSceneKit: sceneView)
     }
     
     func prepareShip() {
-//        DispatchQueue.main.async { [self] in
-            // Create a new scene
-            let scene = SCNScene(named: "art.scnassets/Ship/ship.scn")!
-            let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/Ship/ship.scn")!
+        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
 
-            // Set pivot point away from ship body
-            ship.pivot = SCNMatrix4MakeTranslation(40, 0, 0)
-            // Rotate the ship towards its direction of movement
-            ship.eulerAngles = SCNVector3Make(0, -90, 0);
-            
-            // Animate the ship so it spins around its pivot axis
-            let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
-            let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
-            let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
-            let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
-            let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
-            let repeatForever = SCNAction.repeatForever(rotateAndHover)
-            ship.runAction(repeatForever)
-            
-            // Scale down the size of the scene to better fit live camera feed
-            ship.scale = SCNVector3(0.012, 0.012, 0.012)
-            // Set position so that the model is comfortable height and distance from device
-            ship.position = SCNVector3(0.0, -0.1, -1.2)
-            
-            // Set the scene to the view
-            self.sceneView.scene = scene
-//        }
+        // Set pivot point away from ship body
+        ship.pivot = SCNMatrix4MakeTranslation(40, 0, 0)
+        // Rotate the ship towards its direction of movement
+        ship.eulerAngles = SCNVector3Make(0, -90, 0);
+
+        // Animate the ship so it spins around its pivot axis
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
+        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+        let repeatForever = SCNAction.repeatForever(rotateAndHover)
+        ship.runAction(repeatForever)
+
+        // Scale down the size of the scene to better fit live camera feed
+        ship.scale = SCNVector3(0.012, 0.012, 0.012)
+        // Set position so that the model is comfortable height and distance from device
+        ship.position = SCNVector3(0.0, -0.1, -1.2)
+
+        // Set the scene to the view
+        self.sceneView.scene = scene
     }
     
     func prepareSphere() {
-//        DispatchQueue.main.async { [self] in
-            // Create a new scene
-            let scene = SCNScene(named: "art.scnassets/Sphere/sphere.scn")!
-            let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
-            
-            self.centerPivot(node: sphere)
-            
-            // Animate the sphere so it rotates and gently bobbles up and down
-            let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
-            let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
-            let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
-            let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
-            let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
-            let repeatForever = SCNAction.repeatForever(rotateAndHover)
-            sphere.runAction(repeatForever)
-            
-            // Scale down the size of the scene to better fit live camera feed
-            sphere.scale = SCNVector3(0.3, 0.3, 0.3)
-            // Set position so that the model is comfortable height and distance from device
-            sphere.position = SCNVector3(0.0, 0.0, -1.0)
-            
-            // Set the scene to the view
-            self.sceneView.scene = scene
-//        }
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/Sphere/sphere.scn")!
+        let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
+
+        self.centerPivot(node: sphere)
+
+        // Animate the sphere so it rotates and gently bobbles up and down
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+        let repeatForever = SCNAction.repeatForever(rotateAndHover)
+        sphere.runAction(repeatForever)
+
+        // Scale down the size of the scene to better fit live camera feed
+        sphere.scale = SCNVector3(0.3, 0.3, 0.3)
+        // Set position so that the model is comfortable height and distance from device
+        sphere.position = SCNVector3(0.0, 0.0, -1.0)
+
+        // Set the scene to the view
+        self.sceneView.scene = scene
     }
     
     func prepareFox() {
-//        DispatchQueue.main.async { [self] in
-            // Create a new scene
-            let scene = SCNScene(named: "art.scnassets/Fox/max.scn")!
-            let model = scene.rootNode.childNode(withName: "Max_rootNode", recursively: true)!
-            
-            // Prepare and load different fox animations onto base model
-            let idleAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_idle.scn")
-            idleAnimation.stop()
-            model.addAnimationPlayer(idleAnimation, forKey: "idle")
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/Fox/max.scn")!
+        let model = scene.rootNode.childNode(withName: "Max_rootNode", recursively: true)!
+
+        // Prepare and load different fox animations onto base model
+        let idleAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_idle.scn")
+        idleAnimation.stop()
+        model.addAnimationPlayer(idleAnimation, forKey: "idle")
 //            let walkAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_walk.scn")
 //            walkAnimation.stop()
 //            model.addAnimationPlayer(walkAnimation, forKey: "walk")
@@ -293,19 +290,18 @@ extension SCNViewController {
 //            let spinAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_spin.scn")
 //            spinAnimation.stop()
 //            model.addAnimationPlayer(spinAnimation, forKey: "spin")
-            
-            
-            // Play animations
-            model.animationPlayer(forKey: "idle")?.play()
-            
-            // Scale up the size of the scene to better fit live camera feed
-            model.scale = SCNVector3(1.5, 1.5, 1.5)
-            // Set position so that the model is comfortable height and distance from device
-            model.position = SCNVector3(0.0, -1.5, -1.2)
-            
-            // Set the scene to the view
-            self.sceneView.scene = scene
-//        }
+
+
+        // Play animations
+        model.animationPlayer(forKey: "idle")?.play()
+
+        // Scale up the size of the scene to better fit live camera feed
+        model.scale = SCNVector3(1.5, 1.5, 1.5)
+        // Set position so that the model is comfortable height and distance from device
+        model.position = SCNVector3(0.0, -1.5, -1.2)
+
+        // Set the scene to the view
+        self.sceneView.scene = scene
     }
     
     func centerPivot(node: SCNNode) {
