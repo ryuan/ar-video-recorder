@@ -13,10 +13,11 @@
 		12293AD227DDEB0500EB81A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12293AD127DDEB0500EB81A2 /* Assets.xcassets */; };
 		12293AD527DDEB0500EB81A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */; };
 		12293AE227DF4A4600EB81A2 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */; };
-		1275AA8927E6A0BB00222477 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1275AA8827E6A0BB00222477 /* ARVideoKit */; };
 		1275AA8B27E6A3F500222477 /* StoreReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1275AA8A27E6A3F500222477 /* StoreReviewHelper.swift */; };
 		1275AA8F27E7767300222477 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1275AA8E27E7767300222477 /* SplashScreen.storyboard */; };
 		1275AA9127E777DB00222477 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1275AA9027E777DB00222477 /* SplashViewController.swift */; };
+		1275AA9327E7C86500222477 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1275AA9227E7C86500222477 /* Settings.bundle */; };
+		1275AAA527E8288A00222477 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1275AAA427E8288A00222477 /* ARVideoKit */; };
 		12DD40D527E316040030971B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DD40D427E316040030971B /* art.scnassets */; };
 		12DD40D727E33ADB0030971B /* MediaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */; };
 		12DD40DF27E34A580030971B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40DE27E34A580030971B /* DataManager.swift */; };
@@ -30,10 +31,10 @@
 		12293AD127DDEB0500EB81A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12293AD427DDEB0500EB81A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12293AE127DF4A4600EB81A2 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
-		1275AA8627E6A06000222477 /* ARVideoKit-swift_5 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "ARVideoKit-swift_5"; path = "../../../../../Downloads/ARVideoKit-swift_5"; sourceTree = "<group>"; };
 		1275AA8A27E6A3F500222477 /* StoreReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReviewHelper.swift; sourceTree = "<group>"; };
 		1275AA8E27E7767300222477 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		1275AA9027E777DB00222477 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		1275AA9227E7C86500222477 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		12DD40D427E316040030971B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewController.swift; sourceTree = "<group>"; };
 		12DD40DE27E34A580030971B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -44,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1275AA8927E6A0BB00222477 /* ARVideoKit in Frameworks */,
+				1275AAA527E8288A00222477 /* ARVideoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +81,7 @@
 				12293AD127DDEB0500EB81A2 /* Assets.xcassets */,
 				12293AD327DDEB0500EB81A2 /* LaunchScreen.storyboard */,
 				1275AA8E27E7767300222477 /* SplashScreen.storyboard */,
-				1275AA8627E6A06000222477 /* ARVideoKit-swift_5 */,
+				1275AA9227E7C86500222477 /* Settings.bundle */,
 			);
 			path = Ekko;
 			sourceTree = "<group>";
@@ -133,10 +134,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				1275AAA727E8310100222477 /* PBXTargetDependency */,
 			);
 			name = Ekko;
 			packageProductDependencies = (
-				1275AA8827E6A0BB00222477 /* ARVideoKit */,
+				1275AAA427E8288A00222477 /* ARVideoKit */,
 			);
 			productName = Ekko;
 			productReference = 12293AC527DDEB0300EB81A2 /* Ekko.app */;
@@ -167,6 +169,7 @@
 			);
 			mainGroup = 12293ABC27DDEB0300EB81A2;
 			packageReferences = (
+				1275AAA327E8288A00222477 /* XCRemoteSwiftPackageReference "ARVideoKit" */,
 			);
 			productRefGroup = 12293AC627DDEB0300EB81A2 /* Products */;
 			projectDirPath = "";
@@ -186,6 +189,7 @@
 				12DD40D527E316040030971B /* art.scnassets in Resources */,
 				12293AD227DDEB0500EB81A2 /* Assets.xcassets in Resources */,
 				1275AA8F27E7767300222477 /* SplashScreen.storyboard in Resources */,
+				1275AA9327E7C86500222477 /* Settings.bundle in Resources */,
 				12293AD027DDEB0300EB81A2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +212,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1275AAA727E8310100222477 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 1275AAA627E8310100222477 /* ARVideoKit */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		12293ACE27DDEB0300EB81A2 /* Main.storyboard */ = {
@@ -436,9 +447,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		1275AAA327E8288A00222477 /* XCRemoteSwiftPackageReference "ARVideoKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AFathi/ARVideoKit";
+			requirement = {
+				branch = swift_5;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		1275AA8827E6A0BB00222477 /* ARVideoKit */ = {
+		1275AAA427E8288A00222477 /* ARVideoKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 1275AAA327E8288A00222477 /* XCRemoteSwiftPackageReference "ARVideoKit" */;
+			productName = ARVideoKit;
+		};
+		1275AAA627E8310100222477 /* ARVideoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1275AAA327E8288A00222477 /* XCRemoteSwiftPackageReference "ARVideoKit" */;
 			productName = ARVideoKit;
 		};
 /* End XCSwiftPackageProductDependency section */

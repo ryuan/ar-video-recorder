@@ -38,10 +38,27 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        
+        // Set the pivot point of the AR scene to the center of the bounding box
+        
+        // 1. Get The Bounding Box Of The Node
+        let minimum = SIMD3<Float>(ship.boundingBox.min)
+        let maximum = SIMD3<Float>(ship.boundingBox.max)
+        
+        // 2. Set The Translation To Be Half Way Between The Vector
+        let translation = (maximum + minimum) * 0.5
+
+        // 3. Set The Pivot
+        ship.pivot = SCNMatrix4MakeTranslation(translation.x, translation.y, translation.z)
+        
+        // Scale down the size of the scene to better fit live camera feed
+        ship.scale = SCNVector3(0.01, 0.01, 0.01)
+        // Set position so that the model is a bit lower from the phone height
+        ship.position = SCNVector3(0.0, -0.1, -0.8)
         
         // Set the scene to the view
         sceneView.scene = scene
-        sceneView.scene.rootNode.scale = SCNVector3(0.2, 0.2, 0.5)
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         
@@ -139,11 +156,11 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     // REMINDER TO SELF: METHOD MUST BE CALLED IN MAIN THREAD OR APP WILL CRASH
     func exportMessage(success: Bool, status: PHAuthorizationStatus) {
         if success {
-            let alert = UIAlertController(title: "Exported", message: "Media exported to camera roll successfully!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Awesome", style: .cancel, handler: nil))
+            let alert = UIAlertController(title: "Saved!", message: "Media exported to your camera roll!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else if status == .denied || status == .restricted || status == .notDetermined {
-            let errorView = UIAlertController(title: "😅", message: "Please allow access to the photo library in order to save this media file.", preferredStyle: .alert)
+            let errorView = UIAlertController(title: "Access Required", message: "Please allow access to the photo library in order to save the file.", preferredStyle: .alert)
             let settingsBtn = UIAlertAction(title: "Open Settings", style: .cancel) { (_) -> Void in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return

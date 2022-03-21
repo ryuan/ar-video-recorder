@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Track app launches to trigger app rating alert.
         StoreReviewHelper.incrementAppOpenedCount()
         
+        // Set default values for user settings. This will not rewrite defaults.
+        prepareDefaultSettings()
+        
         return true
     }
 
@@ -37,9 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        
-        print("Entering background")
-//        showSplashScreen(autoDismiss: false, label: "👀")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -51,16 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Did become active")
         if launchFromTerminated {
-            showSplashScreen(autoDismiss: false, label: "hi there")
-            launchFromTerminated = false
+            let firstLaunch = UserDefaults.standard.bool(forKey: "firstLaunch")
+            if firstLaunch {
+                showSplashScreen(autoDismiss: false, label: "hi there")
+                launchFromTerminated = false
+                UserDefaults.standard.set(false, forKey: "firstLaunch")
+            }
         }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
 
@@ -96,7 +98,36 @@ extension AppDelegate {
                 return vc
             }
         } else {
-            return topController(UIApplication.shared.keyWindow!.rootViewController!)
+            return topController(UIApplication.shared.currentWindow!.rootViewController)
         }
+    }
+    
+    fileprivate func prepareDefaultSettings() {
+        let userDefaults = UserDefaults.standard
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/y"
+        let formattedDate = dateFormatter.string(from: date)
+        
+        let defaults = [
+            "developer" : "Ruoda Yuan",
+            "version" : "1.0.0",
+            "initialLaunch": formattedDate,
+            "firstLaunch": true ] as [String : Any]
+        userDefaults.register(defaults: defaults)
+        userDefaults.synchronize()
+        print(userDefaults.dictionaryRepresentation())
+    }
+}
+
+extension UIApplication {
+    var currentWindow: UIWindow? {
+        connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
     }
 }
