@@ -19,7 +19,6 @@
 		1275AA9327E7C86500222477 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1275AA9227E7C86500222477 /* Settings.bundle */; };
 		1275AAA527E8288A00222477 /* ARVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1275AAA427E8288A00222477 /* ARVideoKit */; };
 		12DD40D527E316040030971B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DD40D427E316040030971B /* art.scnassets */; };
-		12DD40D727E33ADB0030971B /* MediaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */; };
 		12DD40DF27E34A580030971B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DD40DE27E34A580030971B /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +35,6 @@
 		1275AA9027E777DB00222477 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		1275AA9227E7C86500222477 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		12DD40D427E316040030971B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewController.swift; sourceTree = "<group>"; };
 		12DD40DE27E34A580030971B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				12293ACC27DDEB0300EB81A2 /* SCNViewController.swift */,
-				12DD40D627E33ADB0030971B /* MediaCollectionViewController.swift */,
 				1275AA9027E777DB00222477 /* SplashViewController.swift */,
 			);
 			path = Controller;
@@ -203,7 +200,6 @@
 			files = (
 				12293ACD27DDEB0300EB81A2 /* SCNViewController.swift in Sources */,
 				12DD40DF27E34A580030971B /* DataManager.swift in Sources */,
-				12DD40D727E33ADB0030971B /* MediaCollectionViewController.swift in Sources */,
 				12293AC927DDEB0300EB81A2 /* AppDelegate.swift in Sources */,
 				12293AE227DF4A4600EB81A2 /* CircleProgressView.swift in Sources */,
 				1275AA9127E777DB00222477 /* SplashViewController.swift in Sources */,

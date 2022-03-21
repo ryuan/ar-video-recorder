@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Track app launches to trigger app rating alert.
         StoreReviewHelper.incrementAppOpenedCount()
         
+        // Reset UserDefaults for debugging (uncomment before publishing app).
+        UserDefaults.resetDefaults()
+        
         // Set default values for user settings. This will not rewrite defaults.
         prepareDefaultSettings()
         
@@ -129,5 +132,13 @@ extension UIApplication {
         .compactMap({$0})
         .first?.windows
         .filter({$0.isKeyWindow}).first
+    }
+}
+
+extension UserDefaults {
+    static func resetDefaults() {
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
     }
 }
