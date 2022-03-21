@@ -37,7 +37,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         sceneView.showsStatistics = false
         
         // Load the ship scene to start
-        prepareShip()
+        prepareSphere()
         
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
@@ -168,7 +168,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 }
 
 
-// MARK: - Prepare Scenes
+// MARK: - Prepare and configure SCNScenes
 
 extension SCNViewController {
     func prepareShip() {
@@ -180,8 +180,8 @@ extension SCNViewController {
         
         // Scale down the size of the scene to better fit live camera feed
         ship.scale = SCNVector3(0.01, 0.01, 0.01)
-        // Set position so that the model is a bit lower from the phone height
-        ship.position = SCNVector3(0.0, -0.1, -0.8)
+        // Set position so that the model is comfortable height and distance from device
+        ship.position = SCNVector3(0.0, 0.0, -0.8)
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -190,14 +190,23 @@ extension SCNViewController {
     func prepareSphere() {
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/sphere.scn")!
-        let sphere = scene.rootNode
+        let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
         
         centerPivot(node: sphere)
         
+        // Animte the sphere so it rotates and gently bobbles up and down
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+        let repeatForever = SCNAction.repeatForever(rotateAndHover)
+        sphere.runAction(repeatForever)
+        
         // Scale down the size of the scene to better fit live camera feed
-        sphere.scale = SCNVector3(0.01, 0.01, 0.01)
-        // Set position so that the model is a bit lower from the phone height
-        sphere.position = SCNVector3(0.0, -0.1, -0.8)
+        sphere.scale = SCNVector3(0.3, 0.3, 0.3)
+        // Set position so that the model is comfortable height and distance from device
+        sphere.position = SCNVector3(0.0, 0.0, -1.0)
         
         // Set the scene to the view
         sceneView.scene = scene
