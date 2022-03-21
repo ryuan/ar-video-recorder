@@ -81,6 +81,11 @@ with the AR world</string>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="8em-Cb-Ngi" appends="YES" id="1fg-iY-JBg"/>
+                                    <outletCollection property="gestureRecognizers" destination="RTd-1I-cFi" appends="YES" id="zLo-OL-Oul"/>
+                                </connections>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnl-Pk-iku">
                                 <rect key="frame" x="171.66666666666666" y="744.66666666666663" width="84.999999999999972" height="85"/>
@@ -169,6 +174,16 @@ with the AR world</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="8em-Cb-Ngi">
+                    <connections>
+                        <action selector="swipeMade:" destination="BV1-FR-VrT" id="607-NQ-kzt"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="RTd-1I-cFi">
+                    <connections>
+                        <action selector="swipeMade:" destination="BV1-FR-VrT" id="KUf-y5-XEo"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="48" y="63"/>
         </scene>

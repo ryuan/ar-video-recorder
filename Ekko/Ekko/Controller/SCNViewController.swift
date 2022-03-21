@@ -168,6 +168,20 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 }
 
 
+// MARK: - Gesture Methods
+
+extension SCNViewController {
+    @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            print("left swipe made")
+        }
+        if sender.direction == .right {
+            print("right swipe made")
+        }
+    }
+}
+
+
 // MARK: - Prepare and configure SCNScenes
 
 extension SCNViewController {
