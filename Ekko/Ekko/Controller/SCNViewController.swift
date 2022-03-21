@@ -17,6 +17,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     @IBOutlet weak var stopSquareView: UIView!
     @IBOutlet weak var circleProgressBtn: UIButton!
     @IBOutlet weak var optionButton: UIButton!
+    @IBOutlet weak var sceneLabel: UILabel!
     @IBOutlet weak var closeBtn: UIButton!
     
     var recorder: RecordAR?
@@ -207,12 +208,16 @@ extension SCNViewController {
         switch sceneOption {
         case 0:
             prepareShip()
+            sceneLabel.text = "✈️"
         case 1:
             prepareFox()
+            sceneLabel.text = "🦊"
         case 2:
             prepareSphere()
+            sceneLabel.text = "🔘"
         default:
             prepareShip()
+            sceneLabel.text = "✈️"
         }
     }
     
@@ -283,6 +288,16 @@ extension SCNViewController {
             let idleAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_idle.scn")
             idleAnimation.stop()
             model.addAnimationPlayer(idleAnimation, forKey: "idle")
+//            let walkAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_walk.scn")
+//            walkAnimation.stop()
+//            model.addAnimationPlayer(walkAnimation, forKey: "walk")
+//            let jumpAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_jump.scn")
+//            jumpAnimation.stop()
+//            model.addAnimationPlayer(jumpAnimation, forKey: "jump")
+//            let spinAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_spin.scn")
+//            spinAnimation.stop()
+//            model.addAnimationPlayer(spinAnimation, forKey: "spin")
+            
             
             // Play animations
             model.animationPlayer(forKey: "idle")?.play()

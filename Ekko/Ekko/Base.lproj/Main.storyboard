@@ -126,7 +126,7 @@ with the AR world</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-XV-Tk9">
-                                <rect key="frame" x="20" y="767" width="40" height="40"/>
+                                <rect key="frame" x="40" y="767" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Hk-Zt-G7S"/>
                                     <constraint firstAttribute="width" constant="40" id="nEt-jS-c29"/>
@@ -141,6 +141,16 @@ with the AR world</string>
                                     <action selector="changeOption:" destination="BV1-FR-VrT" eventType="touchUpInside" id="BOl-45-OqB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sE1-qB-yvw">
+                                <rect key="frame" x="348" y="767" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Uq-eZ-ifc"/>
+                                    <constraint firstAttribute="width" constant="40" id="a35-Dp-reh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuQ-xw-jfH">
                                 <rect key="frame" x="20" y="20" width="34" height="32"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,9 +193,11 @@ with the AR world</string>
                             <constraint firstItem="Pza-Ov-NLI" firstAttribute="centerX" secondItem="oih-0v-YR4" secondAttribute="centerX" id="fT3-Pr-dkd"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="width" secondItem="U0K-SW-4ec" secondAttribute="width" id="l6X-EI-IDH"/>
                             <constraint firstItem="VuQ-xw-jfH" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="20" id="osu-22-bGW"/>
-                            <constraint firstItem="WKN-XV-Tk9" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="20" id="qQ8-ro-DlQ"/>
+                            <constraint firstItem="WKN-XV-Tk9" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="40" id="qQ8-ro-DlQ"/>
                             <constraint firstItem="Pza-Ov-NLI" firstAttribute="centerY" secondItem="oih-0v-YR4" secondAttribute="centerY" id="qTK-wq-ThD"/>
+                            <constraint firstItem="sE1-qB-yvw" firstAttribute="centerY" secondItem="oih-0v-YR4" secondAttribute="centerY" id="qqc-V1-AyP"/>
                             <constraint firstItem="oih-0v-YR4" firstAttribute="centerY" secondItem="WKN-XV-Tk9" secondAttribute="centerY" id="xyf-r1-fgT"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="sE1-qB-yvw" secondAttribute="trailing" constant="40" id="yBU-oO-s5y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Q09-7S-nVP"/>
@@ -195,6 +207,7 @@ with the AR world</string>
                         <outlet property="closeBtn" destination="VuQ-xw-jfH" id="1qk-w0-Rmn"/>
                         <outlet property="optionButton" destination="WKN-XV-Tk9" id="bOy-Yw-MOH"/>
                         <outlet property="recordBtn" destination="oih-0v-YR4" id="2iB-zN-ydp"/>
+                        <outlet property="sceneLabel" destination="sE1-qB-yvw" id="22B-Mn-jDQ"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="stopSquareView" destination="Pza-Ov-NLI" id="gsj-PW-aKm"/>
                     </connections>
