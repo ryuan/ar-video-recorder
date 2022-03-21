@@ -41,6 +41,7 @@ class DataManager {
         if UserDefaults.standard.object(forKey: "LastOption") != nil {
             return defaults.integer(forKey: "LastOption")
         } else {
+            print("last shooting option not found in cache - defaulting to 0")
             return 0
         }
     }
@@ -56,7 +57,7 @@ class DataManager {
             print("last scene found: \(defaults.integer(forKey: "LastScene"))")
             return defaults.integer(forKey: "LastScene")
         } else {
-            print("last scene not found - defaulting to 0")
+            print("last used scene not found in cache - defaulting to 0")
             return 0
         }
     }

@@ -66,29 +66,23 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
             optionButton.setImage(UIImage(systemName: "livephoto"), for: .normal)
         }
         
+        /*-------- Prepare ARVideoKit recorder --------*/
+        
         // Initialize ARVideoKit recorder
         recorder = RecordAR(ARSceneKit: sceneView)
         
-        /*-------- ARVideoKit Configuration --------*/
-        
         // Set the recorder's delegate
         recorder?.delegate = self
-
         // Set the renderer's delegate
         recorder?.renderAR = self
-        
         // Configure the renderer to perform additional image & video processing
         recorder?.onlyRenderWhileRecording = false
-        
         // Configure ARKit content mode. Default is .auto
         recorder?.contentMode = .aspectFill
-        
         // Add environment light rendering. Default is false
         recorder?.enableAdjustEnvironmentLighting = true
-        
         // Set the UIViewController orientations
         recorder?.inputViewOrientations = [.landscapeLeft, .landscapeRight, .portrait]
-        
         // Configure RecordAR to store media files in local app directory
         recorder?.deleteCacheWhenExported = false
     }
@@ -222,7 +216,7 @@ extension SCNViewController {
     }
     
     func prepareShip() {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async { [self] in
             // Create a new scene
             let scene = SCNScene(named: "art.scnassets/Ship/ship.scn")!
             let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
@@ -248,11 +242,11 @@ extension SCNViewController {
             
             // Set the scene to the view
             self.sceneView.scene = scene
-        }
+//        }
     }
     
     func prepareSphere() {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async { [self] in
             // Create a new scene
             let scene = SCNScene(named: "art.scnassets/Sphere/sphere.scn")!
             let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
@@ -275,11 +269,11 @@ extension SCNViewController {
             
             // Set the scene to the view
             self.sceneView.scene = scene
-        }
+//        }
     }
     
     func prepareFox() {
-        DispatchQueue.main.async { [self] in
+//        DispatchQueue.main.async { [self] in
             // Create a new scene
             let scene = SCNScene(named: "art.scnassets/Fox/max.scn")!
             let model = scene.rootNode.childNode(withName: "Max_rootNode", recursively: true)!
@@ -309,7 +303,7 @@ extension SCNViewController {
             
             // Set the scene to the view
             self.sceneView.scene = scene
-        }
+//        }
     }
     
     func centerPivot(node: SCNNode) {
