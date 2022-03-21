@@ -22,6 +22,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     var recorder: RecordAR?
     var circleProgressView: CircleProgressView?
     var currentOption: Int?
+    var currentScene: Int?
     
     // Prepare dispatch queue to leverage GCD for running multithreaded operations
     let recordingQueue = DispatchQueue(label: "recordingThread", attributes: .concurrent)
@@ -36,8 +37,15 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         
-        // Load the ship scene to start
-        prepareSphere()
+        // Load the ship scene to start after checking cache
+        switch DataManager.sharedInstance.getLastScene() {
+        case 0:
+            prepareShip()
+        case 1:
+            prepareSphere()
+        default:
+            prepareShip()
+        }
         
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
@@ -172,12 +180,16 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
 extension SCNViewController {
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .left {
-            print("left swipe made")
-        }
         if sender.direction == .right {
-            print("right swipe made")
+            prepareShip()
+            currentScene = 0
         }
+        if sender.direction == .left {
+            prepareSphere()
+            currentScene = 1
+            
+        }
+        DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
     }
 }
 
