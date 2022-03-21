@@ -201,13 +201,25 @@ extension SCNViewController {
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+
+        // Set pivot point away from ship body
+        ship.pivot = SCNMatrix4MakeTranslation(40, 0, 0)
+        // Rotate the ship towards its direction of flight
+        ship.eulerAngles = SCNVector3Make(0, -90, 0);
         
-        centerPivot(node: ship)
+        // Animate the ship so it spins around its pivot axis
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
+        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+        let repeatForever = SCNAction.repeatForever(rotateAndHover)
+        ship.runAction(repeatForever)
         
         // Scale down the size of the scene to better fit live camera feed
-        ship.scale = SCNVector3(0.01, 0.01, 0.01)
+        ship.scale = SCNVector3(0.012, 0.012, 0.012)
         // Set position so that the model is comfortable height and distance from device
-        ship.position = SCNVector3(0.0, 0.0, -0.8)
+        ship.position = SCNVector3(0.0, -0.1, -1.2)
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -220,7 +232,7 @@ extension SCNViewController {
         
         centerPivot(node: sphere)
         
-        // Animte the sphere so it rotates and gently bobbles up and down
+        // Animate the sphere so it rotates and gently bobbles up and down
         let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
         let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
         let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
