@@ -169,23 +169,25 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
 
 extension SCNViewController {
     @IBAction func swipeMade(_ sender: UISwipeGestureRecognizer) {
-        guard let prevScene = currentScene else {
-            return
-        }
-        if sender.direction == .right {
-            print("swiped right!")
-            if prevScene > 0 {
-                currentScene = prevScene - 1
-                playScene(currentScene!)
-                DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+        if recorder?.status == .readyToRecord {
+            guard let prevScene = currentScene else {
+                return
             }
-        }
-        if sender.direction == .left {
-            print("swiped left!")
-            if prevScene < 2 {
-                currentScene = prevScene + 1
-                playScene(currentScene!)
-                DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+            if sender.direction == .right {
+                print("swiped right!")
+                if prevScene > 0 {
+                    currentScene = prevScene - 1
+                    playScene(currentScene!)
+                    DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+                }
+            }
+            if sender.direction == .left {
+                print("swiped left!")
+                if prevScene < 2 {
+                    currentScene = prevScene + 1
+                    playScene(currentScene!)
+                    DataManager.sharedInstance.saveLastScene(currentScene ?? 0)
+                }
             }
         }
     }
