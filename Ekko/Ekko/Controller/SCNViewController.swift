@@ -141,7 +141,7 @@ class SCNViewController: UIViewController, ARSCNViewDelegate, RenderARDelegate, 
     }
     
     // MARK: - Present post-exporting UIAlert
-    // REMINDER TO SELF: METHOD MUST BE CALLED IN MAIN THREAD OR APP WILL CRASH
+    // REMINDER TO SELF: Method must be called on main thread or app will crash!!!
     func exportMessage(success: Bool, status: PHAuthorizationStatus) {
         if success {
             let alert = UIAlertController(title: "Saved!", message: "Media exported to your camera roll!", preferredStyle: .alert)
@@ -196,58 +196,64 @@ extension SCNViewController {
 
 // MARK: - Prepare and configure SCNScenes
 
+// REMINDER TO SELF: Must run SCNAction on main thread if animating multiple scenes!!!
 extension SCNViewController {
     func prepareShip() {
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        DispatchQueue.main.async {
+            // Create a new scene
+            let scene = SCNScene(named: "art.scnassets/ship.scn")!
+            let ship = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
 
-//        // Set pivot point away from ship body
-//        ship.pivot = SCNMatrix4MakeTranslation(40, 0, 0)
-//        // Rotate the ship towards its direction of flight
-//        ship.eulerAngles = SCNVector3Make(0, -90, 0);
-//        
-//        // Animate the ship so it spins around its pivot axis
-//        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
-//        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
-//        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
-//        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
-//        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
-//        let repeatForever = SCNAction.repeatForever(rotateAndHover)
-//        ship.runAction(repeatForever)
-        
-        // Scale down the size of the scene to better fit live camera feed
-        ship.scale = SCNVector3(0.012, 0.012, 0.012)
-        // Set position so that the model is comfortable height and distance from device
-        ship.position = SCNVector3(0.0, -0.1, -1.2)
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+            // Set pivot point away from ship body
+            ship.pivot = SCNMatrix4MakeTranslation(40, 0, 0)
+            // Rotate the ship towards its direction of movement
+            ship.eulerAngles = SCNVector3Make(0, -90, 0);
+            
+            // Animate the ship so it spins around its pivot axis
+            
+            let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 6.0)
+            let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+            let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+            let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+            let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+            let repeatForever = SCNAction.repeatForever(rotateAndHover)
+            ship.runAction(repeatForever)
+            
+            // Scale down the size of the scene to better fit live camera feed
+            ship.scale = SCNVector3(0.012, 0.012, 0.012)
+            // Set position so that the model is comfortable height and distance from device
+            ship.position = SCNVector3(0.0, -0.1, -1.2)
+            
+            // Set the scene to the view
+            self.sceneView.scene = scene
+        }
     }
     
     func prepareSphere() {
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/sphere.scn")!
-        let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
-        
-        centerPivot(node: sphere)
-        
-        // Animate the sphere so it rotates and gently bobbles up and down
-//        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
-//        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
-//        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
-//        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
-//        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
-//        let repeatForever = SCNAction.repeatForever(rotateAndHover)
-//        sphere.runAction(repeatForever)
-        
-        // Scale down the size of the scene to better fit live camera feed
-        sphere.scale = SCNVector3(0.3, 0.3, 0.3)
-        // Set position so that the model is comfortable height and distance from device
-        sphere.position = SCNVector3(0.0, 0.0, -1.0)
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+        DispatchQueue.main.async {
+            // Create a new scene
+            let scene = SCNScene(named: "art.scnassets/sphere.scn")!
+            let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
+            
+            self.centerPivot(node: sphere)
+            
+            // Animate the sphere so it rotates and gently bobbles up and down
+            let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+            let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+            let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+            let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+            let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+            let repeatForever = SCNAction.repeatForever(rotateAndHover)
+            sphere.runAction(repeatForever)
+            
+            // Scale down the size of the scene to better fit live camera feed
+            sphere.scale = SCNVector3(0.3, 0.3, 0.3)
+            // Set position so that the model is comfortable height and distance from device
+            sphere.position = SCNVector3(0.0, 0.0, -1.0)
+            
+            // Set the scene to the view
+            self.sceneView.scene = scene
+        }
     }
     
     func centerPivot(node: SCNNode) {
