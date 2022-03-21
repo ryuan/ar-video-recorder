@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         StoreReviewHelper.incrementAppOpenedCount()
         
         // Reset UserDefaults for debugging (uncomment before publishing app).
-        UserDefaults.resetDefaults()
+//        UserDefaults.resetDefaults()
         
         // Set default values for user settings. This will not rewrite defaults.
         prepareDefaultSettings()
