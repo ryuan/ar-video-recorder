@@ -252,7 +252,7 @@ extension SCNViewController {
         let scene = SCNScene(named: "art.scnassets/Sphere/sphere.scn")!
         let sphere = scene.rootNode.childNode(withName: "sphereMesh", recursively: true)!
 
-        self.centerPivot(node: sphere)
+        self.centerPivot(sphere)
 
         // Animate the sphere so it rotates and gently bobbles up and down
         let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
@@ -277,34 +277,68 @@ extension SCNViewController {
         let scene = SCNScene(named: "art.scnassets/Fox/max.scn")!
         let model = scene.rootNode.childNode(withName: "Max_rootNode", recursively: true)!
 
+        // Rotate the fox towards its direction of movement
+        model.rotation = SCNVector4Make(1, 0, 0, .pi / 2)
+        
         // Prepare and load different fox animations onto base model
         let idleAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_idle.scn")
         idleAnimation.stop()
         model.addAnimationPlayer(idleAnimation, forKey: "idle")
-//            let walkAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_walk.scn")
-//            walkAnimation.stop()
-//            model.addAnimationPlayer(walkAnimation, forKey: "walk")
-//            let jumpAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_jump.scn")
-//            jumpAnimation.stop()
-//            model.addAnimationPlayer(jumpAnimation, forKey: "jump")
-//            let spinAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_spin.scn")
-//            spinAnimation.stop()
-//            model.addAnimationPlayer(spinAnimation, forKey: "spin")
+        let walkAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_walk.scn")
+        walkAnimation.stop()
+        model.addAnimationPlayer(walkAnimation, forKey: "walk")
+        let jumpAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_jump.scn")
+        jumpAnimation.stop()
+        model.addAnimationPlayer(jumpAnimation, forKey: "jump")
+        let spinAnimation = SCNAnimationPlayer.loadAnimation(fromSceneNamed: "art.scnassets/Fox/max_spin.scn")
+        spinAnimation.stop()
+        model.addAnimationPlayer(spinAnimation, forKey: "spin")
 
-
-        // Play animations
-        model.animationPlayer(forKey: "idle")?.play()
+        // Recursively call circleLeft and circleRight. Start with circleRight.
+        circleRight(model)
 
         // Scale up the size of the scene to better fit live camera feed
         model.scale = SCNVector3(1.5, 1.5, 1.5)
-        // Set position so that the model is comfortable height and distance from device
-        model.position = SCNVector3(0.0, -1.5, -1.2)
 
         // Set the scene to the view
         self.sceneView.scene = scene
     }
     
-    func centerPivot(node: SCNNode) {
+    func circleRight(_ node: SCNNode) {
+        node.animationPlayer(forKey: "walk")?.play()
+        
+        // Set pivot point away from fox body
+        node.pivot = SCNMatrix4MakeTranslation(0.5, 0, 0)
+        // Set position of fox to center ahead of device after adjusting pivot (considering circleLeft)
+        node.position = SCNVector3(0.5, -1.5, -1.5)
+        
+        // Assign semicircle with arcRight, then sequence it twice for a full circle
+        let arcRight = SCNAction.rotateBy(x: 0, y: -CGFloat(Float.pi), z: 0, duration: 3.0)
+        let circleRight = SCNAction.sequence([arcRight, arcRight])
+        
+        node.runAction(circleRight) {
+            self.circleLeft(node)
+        }
+    }
+    
+    func circleLeft(_ node: SCNNode) {
+        node.animationPlayer(forKey: "walk")?.play()
+        
+        // Set pivot point away from fox body
+        node.pivot = SCNMatrix4MakeTranslation(-0.5, 0, 0)
+        // Set position of fox to center ahead of device after adjusting pivot (considering circleRight)
+        node.position = SCNVector3(-1, -1.5, -1.5)
+        
+        // Assign semicircle with arcLeft, then sequence it twice for a full circle
+        let arcLeft = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 3.0)
+        let circleLeft = SCNAction.sequence([arcLeft, arcLeft])
+        
+        node.runAction(circleLeft) {
+            self.circleRight(node)
+        }
+    }
+    
+    func centerPivot(_ node: SCNNode) {
         // Set the pivot point of the AR scene to the center of the bounding box
         
         // 1. Get The Bounding Box Of The Node
