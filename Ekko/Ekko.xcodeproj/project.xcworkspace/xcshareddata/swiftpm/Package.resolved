@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "arvideokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AFathi/ARVideoKit",
+      "state" : {
+        "branch" : "swift_5",
+        "revision" : "b923fac2f90621c8156978ec8f3aceecb12bfbeb"
+      }
+    }
+  ],
+  "version" : 2
+}
