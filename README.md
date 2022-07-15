@@ -1,5 +1,11 @@
 # Final Project: Ekko AR Camera
 
+
+
+https://user-images.githubusercontent.com/950298/179126489-ab3b8353-0d8c-4605-b3dc-7b3e5e71fabf.mp4
+
+
+
 * Name:    Ruoda Yuan
 * UChicago Email:   ryuan0@uchicago.edu or ryuan0@cs.uchicago.edu
 * Slack Username:   ryuan0653 (display name is just Ruoda Yuan)
